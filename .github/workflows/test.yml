@@ -22,3 +22,7 @@ jobs:
           ./xp3.sh smoketest/SMOKETEST-XSLT.xpl
           ./xp3.sh smoketest/SMOKETEST-SCHEMATRON.xpl
         id: exec_smoketests
+      - name: Run tests
+        run: |
+          ./xp3.sh testing/HARDFAIL-XPROC3-HOUSE-RULES.xpl
+        id: exec_tests
