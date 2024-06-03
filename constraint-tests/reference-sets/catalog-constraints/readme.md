@@ -21,7 +21,9 @@ its index is defined here https://github.com/usnistgov/OSCAL/blob/4f02dac6f698ef
 
 # Analysis
 
-A Schematron suggests that the rule is properly defined in the Metaschema: see [link-constraints-mockup.sch](ink-constraints-mockup.sch)
+Testing files [blossom_moderate_profile_resolved.xml]() and [test-catalog.xml](test-catalog.xml), a reduced subset with a single control.
+
+A Schematron applied to the tests suggests that the rule is properly defined in the Metaschema: see [link-constraints-mockup.sch](ink-constraints-mockup.sch)
 
 Because it implements the same rule and reports expected results from a resolved profile blossom_moderate_profile_resolved.xml (no errors) and from a reduced copy (errors reported for links to controls that had been removed, i.e. correctly), we have reason to have confidence in the XPath.
 
