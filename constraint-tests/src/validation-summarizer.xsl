@@ -9,46 +9,25 @@
     expand-text="true"
    version="3.0">
    
-
-
    <xsl:template match="/*">
       <REPORT>
          <progress>Examining { count(*/*) }{ if (count(*/*) eq 1) then ' document' else ' documents' } ...</progress>
+
          <xsl:apply-templates select="child::*/document"/>
-         
-         <xsl:variable name="reports" select=".//svrl:failed-assert"/>
-         
-         
+
+         <xsl:variable name="reports" select=".//svrl:failed-assert | .//svrl:successful-report"/>
          <xsl:sequence>
             <xsl:if test="empty($reports)">
-               <summary>ALL GOOD - confirming expected results from validation against reference sets</summary>
+               <summary>ALL GOOD - sample documents come up clean ...</summary>
             </xsl:if>
-            <!--<xsl:on-empty>
-               <summary>ERROR - { count($anomalies) } VALIDATION { if (count($anomalies) eq 1) then 'ANOMALY' else 'ANOMALIES' } FOUND</summary>
-            </xsl:on-empty>-->
+            <xsl:on-empty>
+               <xsl:variable name="broken-docs" select="$reports/ancestor::document"/>
+               <summary>WARNING - { if (count($reports) eq 1) then 'ISSUE' else 'ISSUES' } FOUND IN  { count($broken-docs) } { if (count($broken-docs) eq 1) then 'DOCUMENT' else 'DOCUMENTS' }</summary>
+            </xsl:on-empty>
          </xsl:sequence>
       </REPORT>
    </xsl:template>
    
-   <!--<xsl:template match="/*">
-      <xsl:variable name="anomalies"
-         select="child::NOMINALLY-VALID/document[@SCHEMA-VALIDATION-STATUS='INVALID'] |
-                 child::NOMINALLY-INVALID/document[@SCHEMA-VALIDATION-STATUS='VALID']"/>
-      <REPORT>
-         <progress>Examining { count(*/*) }{ if (count(*/*) eq 1) then ' document' else ' documents' } ...</progress>
-         <xsl:apply-templates select="child::*/document"/>
-         
-         <xsl:sequence>
-            <xsl:if test="empty($anomalies)">
-               <summary>ALL GOOD - confirming expected results from validation against reference sets</summary>
-            </xsl:if>
-            <xsl:on-empty>
-               <summary>ERROR - { count($anomalies) } VALIDATION { if (count($anomalies) eq 1) then 'ANOMALY' else 'ANOMALIES' } FOUND</summary>
-            </xsl:on-empty>
-          </xsl:sequence>
-      </REPORT>
-   </xsl:template>-->
-
    <xsl:variable name="qname-qualifier" as="xs:string" expand-text="false">Q\{\S*?\}</xsl:variable>
    
    <xsl:template match="document">
@@ -57,7 +36,6 @@
          <xsl:apply-templates/>
       </xsl:copy>
    </xsl:template>
-   
    
    <xsl:template match="svrl:failed-assert">
       <xsl:variable name="loc" select="replace(@location,$qname-qualifier,'')"/>
@@ -76,6 +54,5 @@
          <xsl:apply-templates/>
       </finding>
    </xsl:template>
-   
    
 </xsl:stylesheet>

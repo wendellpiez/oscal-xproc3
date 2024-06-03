@@ -47,6 +47,8 @@ Projects currently planned for deployment in this repository include:
   - `data-convert` - convert OSCAL XML into JSON and OSCAL JSON into XML
   - `display-render` - convert OSCAL catalogs (including resolved profiles) into HTML and PDF
   - `index-oscal` - produce indexes to information encoded in OSCAL  
+  - `data-aligner` compare XML and JSON variants using bidirectional conversion
+  - `docx-oscal` scrape docx, render OSCAL - XSweet?
 
 TODO: update this list
 READERS: [anything to add?][repo-issues]
