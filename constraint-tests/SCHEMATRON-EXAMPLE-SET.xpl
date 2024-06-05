@@ -41,7 +41,7 @@
    <p:wrap-sequence name="wrapup" wrapper="ALL-REPORTS"/>
       
    <p:xslt name="assessment" message="[SCHEMATRON-EXAMPLE-SET] Assessing ...">
-      <p:with-input port="stylesheet" href="src/validation-screener.xsl"/>
+      <p:with-input port="stylesheet" href="src/validation-sorter.xsl"/>
    </p:xslt>
    
    <p:xslt name="reduction" message="[SCHEMATRON-EXAMPLE-SET] Reducing ...">
